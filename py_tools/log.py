@@ -31,6 +31,8 @@ class Log:
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
             print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
 
+    # specials
+
     @staticmethod
     def header(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
@@ -39,3 +41,11 @@ class Log:
             print( "\033[0m" + " ".join(map(str,args)), **kwargs)
             print( "\033[0m" + "################################")
             print( "\033[0m" + "")
+
+    @staticmethod
+    def section(*args, **kwargs):
+        print('')
+        print('-'*16)
+        print( "\033[0m" + " ".join(map(str,args)), **kwargs)
+
+    
