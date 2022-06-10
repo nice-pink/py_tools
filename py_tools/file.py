@@ -3,7 +3,7 @@ import string
 import random
 import json
 import errno
-from log import Log
+from .log import Log
 from pathlib import Path
 
 class File:
