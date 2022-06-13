@@ -83,6 +83,10 @@ class File:
                 if exc.errno != errno.EEXIST:
                     raise
 
+    @staticmethod
+    def create_folder(folder: str) -> None:
+        os.mkdir(folder)
+
     # reading
 
     @staticmethod
