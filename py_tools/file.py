@@ -3,6 +3,7 @@ import string
 import random
 import json
 import errno
+import shutil
 from .log import Log
 from pathlib import Path
 
@@ -99,3 +100,19 @@ class File:
     @staticmethod
     def delete_file(filepath: str) -> None:
         os.remove(filepath)
+
+    @staticmethod
+    def delete_folder(folder: str, if_empty_only: bool) -> bool:
+        if not os.path.exists(folder):
+            print('Error: Folder does not exist.', folder)
+            return False
+        
+        if if_empty_only:
+            if len(os.listdir(folder)) > 0:
+                print('Error: Folder not empty.', folder)
+                return False
+            os.rmdir(folder)
+            return True
+        
+        shutil.rmtree(folder)
+        return True
