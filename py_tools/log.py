@@ -67,10 +67,24 @@ class Log:
             print( "\033[0m" + "")
 
     @staticmethod
+    def header_typed(log_type: Type, *args, **kwargs):
+        Log.typed(log_type, '')
+        Log.typed(log_type, '#'*16)
+        Log.typed(log_type, *args, **kwargs)
+        Log.typed(log_type, '#'*16)
+        Log.typed(log_type, '')
+    
+    @staticmethod
     def section(*args, **kwargs):
         print('')
         print('-'*16)
         print( "\033[0m" + " ".join(map(str,args)), **kwargs)
+
+    @staticmethod
+    def section_typed(log_type: Type, *args, **kwargs):
+        Log.typed(log_type, '')
+        Log.typed(log_type, '-'*16)
+        Log.typed(log_type, *args, **kwargs)
 
     # time
 
