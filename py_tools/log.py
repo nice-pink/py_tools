@@ -1,3 +1,5 @@
+import time
+import datetime
 from enum import Enum
 
 class Log:
@@ -7,7 +9,8 @@ class Log:
         Error = 1
         Warning = 2
         Info = 3
-        All = 4
+        Happy = 4
+        All = 5
 
     LOG_LEVEL = Type.All
 
@@ -31,7 +34,20 @@ class Log:
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
             print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
 
-    # specials
+    @staticmethod
+    def typed(log_type: Type, *args, **kwargs):
+        if log_type == Log.Type.NoLog:
+            return
+        elif log_type == Log.Type.Happy:
+            Log.happy(*args, **kwargs)
+        elif log_type == Log.Type.Error:
+            Log.error(*args, **kwargs)
+        elif log_type == Log.Type.Warning:
+            Log.warning(*args, **kwargs)
+        else:
+            Log.info(*args, **kwargs)
+
+    # formatted
 
     @staticmethod
     def header(*args, **kwargs):
@@ -48,4 +64,19 @@ class Log:
         print('-'*16)
         print( "\033[0m" + " ".join(map(str,args)), **kwargs)
 
+    # time
+
+    @staticmethod
+    def time(sec: int,
+             format: str = '%H:%M:%S',
+             log_type: Type = Type.Info):
+        timestamp: str = time.strftime(format, time.gmtime(sec))
+        Log.typed(log_type, timestamp)
     
+    @staticmethod
+    def datetime(sec: int,
+                 format: str = "%Y, %b %d - %H:%M:%S",
+                 log_type: Type = Type.Info):
+        timestamp: str = sec.strftime(format)
+        Log.typed(log_type, timestamp)
+
