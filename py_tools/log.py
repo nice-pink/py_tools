@@ -9,8 +9,9 @@ class Log:
         Error = 1
         Warning = 2
         Info = 3
-        Happy = 4
-        All = 5
+        Blue = 4
+        Happy = 5
+        All = 6
 
     LOG_LEVEL = Type.All
 
@@ -30,6 +31,11 @@ class Log:
             print( "\033[0m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
+    def info_blue(*args, **kwargs):
+        if Log.LOG_LEVEL.value >= Log.Type.Info.value:
+            print( "\033[1;34m" + " ".join(map(str,args)), **kwargs)
+
+    @staticmethod
     def happy(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
             print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
@@ -44,6 +50,8 @@ class Log:
             Log.error(*args, **kwargs)
         elif log_type == Log.Type.Warning:
             Log.warning(*args, **kwargs)
+        elif log_type == Log.Type.Blue:
+            Log.info_blue(*args, **kwargs)
         else:
             Log.info(*args, **kwargs)
 
@@ -80,3 +88,5 @@ class Log:
         timestamp: str = sec.strftime(format)
         Log.typed(log_type, timestamp)
 
+# if __name__=='__main__':
+#     Log.info_blue('hello')
