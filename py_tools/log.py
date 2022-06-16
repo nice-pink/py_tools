@@ -91,16 +91,20 @@ class Log:
     @staticmethod
     def time(sec: int,
              format: str = '%H:%M:%S',
+             prefix: str = "",
+             suffix: str = "",
              log_type: Type = Type.Info):
         timestamp: str = time.strftime(format, time.gmtime(sec))
-        Log.typed(log_type, timestamp)
+        Log.typed(log_type, prefix, timestamp, suffix)
     
     @staticmethod
     def datetime(sec: int,
                  format: str = "%Y, %b %d - %H:%M:%S",
+                 prefix: str = "",
+                 suffix: str = "",
                  log_type: Type = Type.Info):
         timestamp: str = sec.strftime(format)
-        Log.typed(log_type, timestamp)
+        Log.typed(log_type, prefix, timestamp, suffix)
 
 # if __name__=='__main__':
 #     Log.info_blue('hello')
