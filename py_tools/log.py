@@ -1,3 +1,4 @@
+import os
 import time
 import datetime
 from enum import Enum
@@ -14,6 +15,19 @@ class Log:
         All = 6
 
     LOG_LEVEL = Type.All
+
+    @staticmethod
+    def get_log_level() -> Type:
+        log_level = os.getenv('PT_LOG_LEVEL')
+        if not log_level or log_level == 'DEBUG':
+            return Log.Type.All
+        if log_level == 'WARNING' or log_level == 'WARN':
+            return Log.Type.Warning
+        if log_level == 'ERROR':
+            return Log.Type.Error
+        if log_level == 'NONE':
+            return Log.Type.NoLog
+        return Log.Type.All
 
     @staticmethod
     def error(*args, **kwargs):
