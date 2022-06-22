@@ -14,8 +14,10 @@ class Log:
         Happy = 5
         All = 6
 
+    LOG_LEVEL = Type.All
+    
     @staticmethod
-    def get_log_level() -> Type:
+    def set_log_level() -> Type:
         log_level = os.getenv('PT_LOG_LEVEL')
         if not log_level or log_level == 'DEBUG':
             return Log.Type.All
@@ -27,8 +29,6 @@ class Log:
             return Log.Type.NoLog
         return Log.Type.All
 
-    LOG_LEVEL = get_log_level()
-    
     @staticmethod
     def error(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Error.value:
