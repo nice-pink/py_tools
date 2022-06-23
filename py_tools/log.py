@@ -9,10 +9,11 @@ class Log:
         NoLog = 0
         Error = 1
         Warning = 2
-        Info = 3
-        Blue = 4
-        Happy = 5
-        All = 6
+        Success = 3
+        Info = 4
+        Blue = 5
+        Happy = 6
+        All = 7
 
     LOG_LEVEL = Type.All
     
@@ -24,6 +25,8 @@ class Log:
             return Log.Type.Warning
         if log_level == 'ERROR':
             return Log.Type.Error
+        if log_level == 'SUCCESS':
+            return Log.Type.Success
         if log_level == 'NONE':
             return Log.Type.NoLog
         return Log.Type.All
@@ -50,7 +53,7 @@ class Log:
 
     @staticmethod
     def happy(*args, **kwargs):
-        if Log.LOG_LEVEL.value >= Log.Type.Info.value:
+        if Log.LOG_LEVEL.value >= Log.Type.Info.value or Log.LOG_LEVEL.value == Log.Type.Success.value:
             print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
