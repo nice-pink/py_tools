@@ -17,6 +17,7 @@ class Log:
         All = 8
 
     LOG_LEVEL = Type.All
+    INCLUDE_WARNINGS = False
     
     @staticmethod
     def get_log_level(log_level: str) -> Type:
@@ -39,7 +40,7 @@ class Log:
 
     @staticmethod
     def warning(*args, **kwargs):
-        if Log.LOG_LEVEL.value >= Log.Type.Warning.value:
+        if Log.LOG_LEVEL.value >= Log.Type.Warning.value or Log.INCLUDE_WARNINGS:
             print( "\033[1;33m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
