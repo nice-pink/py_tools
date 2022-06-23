@@ -73,11 +73,11 @@ class Log:
     @staticmethod
     def header(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
-            print( "\033[0m" + "")
-            print( "\033[0m" + "################################")
-            print( "\033[0m" + " ".join(map(str,args)), **kwargs)
-            print( "\033[0m" + "################################")
-            print( "\033[0m" + "")
+            Log.info( "\033[0m" + "")
+            Log.info( "\033[0m" + "################################")
+            Log.info( "\033[0m" + " ".join(map(str,args)), **kwargs)
+            Log.info( "\033[0m" + "################################")
+            Log.info( "\033[0m" + "")
 
     @staticmethod
     def header_typed(log_type: Type, *args, **kwargs):
@@ -89,9 +89,9 @@ class Log:
     
     @staticmethod
     def section(*args, **kwargs):
-        print('')
-        print('-'*16)
-        print( "\033[0m" + " ".join(map(str,args)), **kwargs)
+        Log.info('')
+        Log.info('-'*16)
+        Log.info( "\033[0m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def section_typed(log_type: Type, *args, **kwargs):
