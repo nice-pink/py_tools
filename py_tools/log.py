@@ -10,10 +10,11 @@ class Log:
         Error = 1
         Warning = 2
         Success = 3
-        Info = 4
-        Blue = 5
-        Happy = 6
-        All = 7
+        Result = 4
+        Info = 5
+        Blue = 6
+        Happy = 7
+        All = 8
 
     LOG_LEVEL = Type.All
     
@@ -33,7 +34,7 @@ class Log:
 
     @staticmethod
     def error(*args, **kwargs):
-        if Log.LOG_LEVEL.value >= Log.Type.Error.value:
+        if Log.LOG_LEVEL.value >= Log.Type.Error.value or Log.LOG_LEVEL.value == Log.Type.Result.value:
             print( "\033[1;31m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
@@ -53,7 +54,7 @@ class Log:
 
     @staticmethod
     def happy(*args, **kwargs):
-        if Log.LOG_LEVEL.value >= Log.Type.Info.value or Log.LOG_LEVEL.value == Log.Type.Success.value:
+        if Log.LOG_LEVEL.value >= Log.Type.Info.value or Log.LOG_LEVEL.value == Log.Type.Success.value or Log.LOG_LEVEL.value == Log.Type.Result.value:
             print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
