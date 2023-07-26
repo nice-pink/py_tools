@@ -1,9 +1,11 @@
+import setuptools
+
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name='py_tools',
-    version='0.0.20',
+    version='0.0.21',
     author='Raffael @ Nice Pink',
     author_email='r@nice.pink',
     description='Python tools',
