@@ -1,6 +1,6 @@
 import os
 import time
-import datetime
+from datetime import datetime
 from enum import Enum
 
 class Log:
@@ -19,6 +19,10 @@ class Log:
     INCLUDE_WARNINGS = False
     
     @staticmethod
+    def get_timestamp() -> str:
+        return datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+
+    @staticmethod
     def get_log_level(log_level: str) -> Type:
         if not log_level or log_level == 'DEBUG':
             return Log.Type.All
@@ -35,27 +39,27 @@ class Log:
     @staticmethod
     def error(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Error.value:
-            print( "\033[1;31m" + " ".join(map(str,args)), **kwargs)
+            print( "\033[1;31m" + Log.get_timestamp() + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def warning(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Warning.value or Log.INCLUDE_WARNINGS:
-            print( "\033[1;33m" + " ".join(map(str,args)), **kwargs)
+            print( "\033[1;33m" + Log.get_timestamp() + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def info(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
-            print( "\033[0m" + " ".join(map(str,args)), **kwargs)
+            print( "\033[0m" + Log.get_timestamp() + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def info_blue(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value:
-            print( "\033[1;34m" + " ".join(map(str,args)), **kwargs)
+            print( "\033[1;34m" + Log.get_timestamp() + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def happy(*args, **kwargs):
         if Log.LOG_LEVEL.value >= Log.Type.Info.value or Log.LOG_LEVEL.value == Log.Type.Success.value:
-            print( "\033[1;32m" + " ".join(map(str,args)), **kwargs)
+            print( "\033[1;32m" + Log.get_timestamp() + " ".join(map(str,args)), **kwargs)
 
     @staticmethod
     def typed(log_type: Type, *args, **kwargs):
